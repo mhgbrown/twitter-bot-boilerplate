@@ -1,12 +1,14 @@
-var Twitter = require('twitter'),   // Twitter API wrapper: https://github.com/jdub/node-twitter
-  opts = require('commander');      // Parse command line arguments
+#!/usr/bin/env node
 
-  opts.version('0.0.1')
+var Twitter = require('twitter');
+var Opts = require('commander');
+
+Opts.version('0.0.1')
   .option('-v, --verbose', 'Log some debug info to the console')
   .parse(process.argv);
 
 // Initialize Twitter API keys
-var twitter = new Twitter({
+var twitterClient = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
   access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
@@ -14,20 +16,20 @@ var twitter = new Twitter({
 });
 
 // Verify the credentials
-twitter.get('/account/verify_credentials', function(data) {
+twitterClient.get('/account/verify_credentials', function(error, data, response) {
 
-  if(opts.verbose) {
-    process.stdout.write("credentials: " + JSON.stringify(data));
+  if(Opts.verbose) {
+    console.info("verify_credentials: " + JSON.stringify(response));
   }
 
 });
 
 // Connect to the stream
-twitter.stream('statuses/sample', {}, function(stream) {
+twitterClient.stream('statuses/sample', {}, function(stream) {
   stream.on('data', function(data) {
 
-    if(opts.verbose) {
-      process.stdout.write(JSON.stringify(data) + "\n");
+    if(Opts.verbose) {
+      console.info("stream data: " + JSON.stringify(data));
     }
 
   });

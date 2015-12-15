@@ -1,17 +1,21 @@
 {
-  "name": "twitter-statuses-stream-boilerplate",
+  "name": "twitter-bot-boilerplate",
   "version": "0.0.1",
-  "description": "A template for accessing tweets from Twitter's Streaming API.",
+  "description": "A template for creating bots that interact with the Twitter API.",
   "repository" : {
     "type" : "git",
-    "url" : "http://github.com/mhgbrown/twitter-statuses-stream-boilerplate.git"
+    "url" : "http://github.com/mhgbrown/twitter-bot-boilerplate.git"
   },
+  "license": "MIT",
   "engines": {
-    "node": "^0.10.30",
-    "npm": "1.4.x"
+    "node": "^5.0.0",
+    "npm": "^3.3.12"
   },
   "dependencies": {
     "commander": "^2.0.0",
     "twitter": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node main.js -v"
   }
 }
